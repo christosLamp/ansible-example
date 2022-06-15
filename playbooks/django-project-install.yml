@@ -57,16 +57,6 @@
       - "{{django.env | dict2items}}"
 
 
-  - name: print ip
-    debug:
-      msg: "ALLOWED_HOSTS={{'*'}}"
-
-  - name: add ip in django ALLOWED_HOSTS
-    lineinfile:
-      dest: "{{app_dir}}/myproject/myproject/settings.py"
-      regexp: "^ALLOWED_HOSTS ="
-      line: "ALLOWED_HOSTS = {{'*'}}"
-      state: present
 
   - name: install and activate virtual environment
     block:
