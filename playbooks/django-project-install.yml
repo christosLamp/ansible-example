@@ -92,7 +92,19 @@
 
 
 
+    - name: Creating a file with content
+      copy:
+        dest: "/etc/systemd/system/gunicorn.socket"
+        content: |
+          [Unit]
+          Description=gunicorn socket
 
+          [Socket]
+          ListenStream=/run/gunicorn.sock
+
+          [Install]
+          WantedBy=sockets.target
+    
 
     - name: copy django service file
       template:
