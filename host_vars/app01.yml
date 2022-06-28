@@ -1,6 +1,6 @@
 service:
-  workingdir: /home/chris/flask-project/
-  execstart: /home/chris/flask-project/fvenv/bin/gunicorn --access-logfile - --workers 3 --bind 0.0.0.0:{{app_port}} app.main:app
+  workingdir: /home/chrisotelios/flask-project/
+  execstart: /home/chrisotelios/flask-project/fvenv/bin/gunicorn --access-logfile - --workers 3 --bind 0.0.0.0:{{app_port}} app.main:app
 app_port: 8000
 
 app:
