@@ -8,5 +8,5 @@
 
   - django_manage:
       command: loaddata
-      app_path: "{{app_dir/users/fixtures}}"
+      app_path: "{{app_dir}}/users/fixtures"
       fixtures: "{{ initial_data.json }}"
