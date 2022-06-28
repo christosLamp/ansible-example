@@ -3,8 +3,18 @@
 
   vars:
       app_dir: "{{user_dir}}/django-project"
-
+  
   tasks:
+
+  - name: print user_dir
+    debug:
+      msg: "user dir is {{user_dir}}"
+
+  - name: Run whoami without become.
+    command: whoami
+    changed_when: false
+    become: false
+    register: whoami
 
   - django_manage:
       command: loaddata
