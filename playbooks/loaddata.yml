@@ -19,4 +19,4 @@
   - django_manage:
       command: loaddata
       app_path: "{{app_dir}}"
-      fixtures: "/home"
+      fixtures: ""
