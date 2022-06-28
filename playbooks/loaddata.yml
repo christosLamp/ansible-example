@@ -1,0 +1,12 @@
+---
+- hosts: webserver
+
+  vars:
+      app_dir: "{{user_dir}}/django-project"
+
+  tasks:
+
+  - django_manage:
+      command: loaddata
+      app_path: "{{app_dir}}"
+      fixtures: "{{ initial_data }}"
