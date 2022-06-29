@@ -5,7 +5,6 @@
       app_dir: "{{user_dir}}/django-project"
   
   tasks:
-
     - name: Collect PostgreSQL version and extensions
       become: yes
       become_user: postgres
