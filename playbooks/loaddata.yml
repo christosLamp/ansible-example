@@ -6,17 +6,7 @@
   
   tasks:
 
-  - name: print user_dir
-    debug:
-      msg: "user dir is {{user_dir}}"
-
-  - name: Run whoami without become.
-    command: whoami
-    changed_when: false
-    become: false
-    register: whoami
-
-  - django_manage:
-      command: loaddata
-      app_path: "{{app_dir}}"
-      fixtures: ""
+  - name: Insert query to test_table in db test_db
+      community.postgresql.postgresql_query:
+        db: demodb
+        query: INSERT INTO users_myuser VALUES (2,'pbkdf2_sha256$180000$jspFOqq1G0Uj$WYR2sUVZW07WLxRBw8wdxVWq0+e2uShlRMrOdG4cAFo=','2022-06-29 19:44:38.977579+03',true,'asd','asd','asd','chrisotelios@gmail.com',true,true,'2022-06-29 19:42:28.314074+03',false,true);
