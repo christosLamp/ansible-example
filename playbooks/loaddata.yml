@@ -10,7 +10,7 @@
       become_user: postgres
       community.postgresql.postgresql_query:
         db: demodb
-        query: INSERT INTO users_myuser VALUES (4,'pbkdf2_sha256$180000$jspFOqq1G0Uj$WYR2sUVZW07WLxRBw8wdxVWq0+e2uShlRMrOdG4cAFo=','2022-06-29 19:44:38.977579+03',true,'aa','asd','asd','chrisotelios@gmail.com',true,true,'2022-06-29 19:42:28.314074+03',false,true);
+        query: INSERT INTO users_myuser VALUES (1,'pbkdf2_sha256$180000$jspFOqq1G0Uj$WYR2sUVZW07WLxRBw8wdxVWq0+e2uShlRMrOdG4cAFo=','2022-06-29 19:44:38.977579+03',true,'chris','asd','asd','chrisotelios@gmail.com',true,true,'2022-06-29 19:42:28.314074+03',false,true);
 
     - name: loaddata
       become: yes
