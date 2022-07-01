@@ -174,7 +174,7 @@
     become: yes
     become_user: root
 
-    - name: de-activate default nginx site
+    - name: collect static files
       django_manage:
         command: collectstatic
         app_path: "{{ app_dir }}"
