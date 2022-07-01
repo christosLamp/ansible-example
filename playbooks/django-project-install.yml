@@ -99,14 +99,14 @@
         - collectstatic
       notify: restart gunicorn
       
-    # - name: loaddata
-    #   django_manage:
-    #     command: "{{ item }}"
-    #     app_path: "{{app_dir}}/myproject"
-    #     virtualenv: "{{app_dir}}/myvenv"
-    #     fixtures: "initial_data.json"
-    #   with_items:
-    #     - loaddata
+    - name: loaddata
+      django_manage:
+        command: "{{ item }}"
+        app_path: "{{app_dir}}/myproject"
+        virtualenv: "{{app_dir}}/myvenv"
+        fixtures: "initial_data.json"
+      with_items:
+        - loaddata
 
 
 
