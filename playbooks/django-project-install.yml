@@ -177,6 +177,7 @@
     - django_manage:
       command: collectstatic
       app_path: "{{ app_dir }}"
+      notify: restart gunicorn
 
 
   handlers:
