@@ -17,7 +17,7 @@
       become_user: postgres
       community.postgresql.postgresql_query:
         db: demodb
-        query: INSERT INTO secretary_secretary VALUES (1000);
+        query: INSERT INTO secretary_secretary VALUES (1);
 
     
     - name: loaddata
