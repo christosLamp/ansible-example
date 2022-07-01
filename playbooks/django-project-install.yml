@@ -107,6 +107,7 @@
         fixtures: "initial_data.json"
       with_items:
         - loaddata
+      ignore_errors: yes
 
 
 
