@@ -168,7 +168,7 @@
     - name: collect static files
       django_manage:
         command: collectstatic
-        app_path: "{{ app_dir }}/django-prroject/myproject"
+        app_path: "{{ app_dir }}/django-prroject"
       notify: restart gunicorn
 
     - name: de-activate default nginx site
