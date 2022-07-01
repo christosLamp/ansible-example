@@ -174,10 +174,12 @@
     become: yes
     become_user: root
 
-    - django_manage:
-      command: collectstatic
-      app_path: "{{ app_dir }}"
+    - name: de-activate default nginx site
+      django_manage:
+        command: collectstatic
+        app_path: "{{ app_dir }}"
       notify: restart gunicorn
+
 
 
   handlers:
