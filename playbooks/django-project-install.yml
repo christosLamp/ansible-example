@@ -8,6 +8,10 @@
 
   tasks:
 
+  - name: Return motd to registered var
+      ansible.builtin.command: pwd
+      register: mymotd
+
   - name: print user_dir
     debug:
       msg: "user dir is {{user_dir}}"
@@ -171,9 +175,6 @@
     #     app_path: "{{ app_dir }}/django-prroject"
     #   notify: restart gunicorn
     
-    - name: Return motd to registered var
-      ansible.builtin.command: source {{app_dir}}/myvenv/bin/activate
-      register: mymotd
 
     - name: de-activate default nginx site
       file:
