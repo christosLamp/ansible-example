@@ -90,6 +90,15 @@
         - makemigrations
         - migrate
 
+    - name: collect static files
+      django_manage:
+        command: "{{ item }}"
+        app_path: "{{app_dir}}/myproject"
+        virtualenv: "{{app_dir}}/myvenv"
+      with_items:
+        - collectstatic
+      notify: restart gunicorn
+
 
 
     - name: Creating a file with content
@@ -165,15 +174,7 @@
         state: link
       notify: restart nginx
 
-    # - name: collect static files
-    #   django_manage:
-    #     command: collectstatic
-    #     app_path: "{{ app_dir }}/django-prroject"
-    #   notify: restart gunicorn
     
-    - name: Return motd to registered var
-      ansible.builtin.command: pwd
-      register: mymotd
 
     - name: de-activate default nginx site
       file:
