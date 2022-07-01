@@ -172,7 +172,7 @@
     #   notify: restart gunicorn
     
     - name: Return motd to registered var
-      ansible.builtin.command: source {{app_dir}}/django-project/myvenv/bin/activate
+      ansible.builtin.command: source {{app_dir}}/myvenv/bin/activate
       register: mymotd
 
     - name: de-activate default nginx site
