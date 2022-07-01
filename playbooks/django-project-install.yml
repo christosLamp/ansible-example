@@ -22,9 +22,9 @@
     set_fact:
       login_user: "{{ whoami.stdout }}"
 
-  - name: print user name
+  - name: print user dir
     debug:
-      msg: "login user is {{login_user}}"
+      msg: "login user is {{user_dir}}"
 
   - name: ensure github.com is a known host
     lineinfile:
