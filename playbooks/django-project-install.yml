@@ -3,7 +3,7 @@
 
   vars:
     app_dir: "{{user_dir}}/django-project"
-    git_repo_url: "https://github.com/christosLamp/devops1.git"
+    git_repo_url: "https://github.com/clamprou/devops1.git"
     git_repo_branch: "main"
 
   tasks:
