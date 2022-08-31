@@ -67,6 +67,12 @@
       dest: /usr/local/bin/docker-compose
       mode: 'u+x,g+x'
 
+  - name: Build an image and push it to a private repo
+  community.docker.docker_image:
+    build:
+      path: .
+    name: registry.ansible.com/chouseknecht/sinatra
+    
 # - hosts: all
 #   become: yes
 #   become_user: root
