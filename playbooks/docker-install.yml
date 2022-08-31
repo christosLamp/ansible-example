@@ -29,13 +29,13 @@
       update_cache: true
     when: ansible_distribution_release == 'focal'
 
-  - include_role:
-      name: geerlingguy.docker
-  - include_role:
-      name: geerlingguy.pip
+#   - include_role:
+#       name: geerlingguy.docker
+#   - include_role:
+#       name: geerlingguy.pip
 
-  - name: 'add users to docker group'
-    user:
-      name: 'vagrant'
-      groups: 'docker'
-      append: 'yes'
+#   - name: 'add users to docker group'
+#     user:
+#       name: 'vagrant'
+#       groups: 'docker'
+#       append: 'yes'
