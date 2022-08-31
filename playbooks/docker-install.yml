@@ -1,33 +1,102 @@
 - hosts: all
   become: yes
-  become_user: root
-  vars:
-    pip_executable: pip3
-    pip_install_packages:
-      - docker
-      - docker-compose
-
+  gather_facts: false
   tasks:
-  - name: Distribution
-    debug: msg="{{ ansible_distribution }}"
-  - name: Distribution version
-    debug: msg="{{ ansible_distribution_version}}"
-  - name: Distribution major version
-    debug: msg="{{ ansible_distribution_major_version }}"
-  - name: Distribution release
-    debug: msg="{{ ansible_distribution_release }}"
-
-
-  - name: Add universe repository for ubuntu release
-    apt_repository:
-      repo: deb http://archive.ubuntu.com/ubuntu {{ ansible_distribution_release }} universe
-      state: present
-  - name: install gnupg2
+  - name: Install docker packages
+    remote_user: ubuntu
     apt:
-      name: gnupg2
+      name: "{{ item }}"
       state: present
-      update_cache: true
-    when: ansible_distribution_release == 'focal'
+      update_cache: yes
+    with_items:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+    tags:
+      - docker
+  - name: Add Docker s official GPG key
+    remote_user: ubuntu
+    apt_key:
+      url: https://download.docker.com/linux/ubuntu/gpg
+      state: present
+    tags:
+      - docker
+  - name: Verify that we have the key with the fingerprint
+    remote_user: ubuntu
+    apt_key:
+      id: 0EBFCD88
+      state: present
+    tags:
+      - docker
+  - name: Set up the stable repository
+    remote_user: ubuntu
+    apt_repository:
+      repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable
+      state: present
+      update_cache: yes
+    tags:
+      - docker
+  - name: Update apt packages
+    remote_user: ubuntu
+    apt:
+      update_cache: yes
+    tags:
+      - docker
+  - name: Install docker
+    remote_user: ubuntu
+    apt:
+      name: docker-ce
+      state: present
+      update_cache: yes
+    #notify: Start docker on boot
+    tags:
+      - docker
+  - name: Add remote "ubuntu" user to "docker" group
+    remote_user: ubuntu
+    user:
+      name: "ubuntu"
+      group: "docker"
+      append: yes
+    tags:
+      - docker
+  - name: Install docker-compose
+    remote_user: ubuntu
+    get_url: 
+      url : https://github.com/docker/compose/releases/download/1.25.1-rc1/docker-compose-Linux-x86_64
+      dest: /usr/local/bin/docker-compose
+      mode: 'u+x,g+x'
+
+# - hosts: all
+#   become: yes
+#   become_user: root
+#   vars:
+#     pip_executable: pip3
+#     pip_install_packages:
+#       - docker
+#       - docker-compose
+
+#   tasks:
+#   - name: Distribution
+#     debug: msg="{{ ansible_distribution }}"
+#   - name: Distribution version
+#     debug: msg="{{ ansible_distribution_version}}"
+#   - name: Distribution major version
+#     debug: msg="{{ ansible_distribution_major_version }}"
+#   - name: Distribution release
+#     debug: msg="{{ ansible_distribution_release }}"
+
+
+#   - name: Add universe repository for ubuntu release
+#     apt_repository:
+#       repo: deb http://archive.ubuntu.com/ubuntu {{ ansible_distribution_release }} universe
+#       state: present
+#   - name: install gnupg2
+#     apt:
+#       name: gnupg2
+#       state: present
+#       update_cache: true
+#     when: ansible_distribution_release == 'focal'
 
 #   - include_role:
 #       name: geerlingguy.docker
