@@ -104,3 +104,4 @@
   - name: docker-compose up
     ansible.builtin.shell:
       cmd: sudo docker-compose up
+      chdir: /home/chrisotelios/docker-project
