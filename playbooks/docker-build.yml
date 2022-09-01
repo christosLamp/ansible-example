@@ -107,6 +107,5 @@
       build:
         path: /home/chrisotelios/docker-project
       state: present
-      publish_all_ports: yes
     become: yes
     become_user: root
