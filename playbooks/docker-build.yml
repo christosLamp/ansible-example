@@ -103,11 +103,15 @@
   - name: build container image
     docker_image:
       name: democontainer:v1.0
-      tag: v1
-      source: local
+      source: build
       build:
         path: /home/chrisotelios/docker-project
       state: present
-      push: yes
     become: yes
-    become_user: chrisotelios
+    become_user: root
+
+    - name: deploy Docker Compose stack
+    community.docker.docker_compose:
+      project_src: /home/chrisotelios/docker-project
+      files:
+      - docker-compose.yml
