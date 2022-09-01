@@ -109,5 +109,4 @@
         path: /home/chrisotelios/docker-project
       state: present
       push: yes
-    become: yes
-    become_user: root
+    
