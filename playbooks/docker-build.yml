@@ -102,6 +102,7 @@
   #   become_user: root
 
   - name: docker-compose up
-    ansible.builtin.shell:
-      cmd: sudo docker-compose up
-      chdir: /home/chrisotelios/docker-project
+    ansible.builtin.shell: |
+      set timeout 10
+      sudo docker-compose up
+      exit 0
