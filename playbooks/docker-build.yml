@@ -103,7 +103,7 @@
   - name: build container image
     docker_image:
       name: democontainer:v1.0
-      source: build
+      source: local
       build:
         path: /home/chrisotelios/docker-project
       state: present
