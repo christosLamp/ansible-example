@@ -106,7 +106,6 @@
       source: build
       build:
         path: /home/chrisotelios/docker-project
-        source: build
       state: present
     become: yes
     become_user: root
