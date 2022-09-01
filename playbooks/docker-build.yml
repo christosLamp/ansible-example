@@ -107,5 +107,7 @@
       build:
         path: /home/chrisotelios/docker-project
       state: present
+      force: yes
+    tags: deb
     become: yes
     become_user: root
