@@ -91,7 +91,7 @@
     become: yes
   - name: copy Dockerfile
     copy:
-      src: ./Dockerfile
+      src: /home/chrisotelios/docker-project/Dockerfile
       dest: /chrisotelios/demo-dockerfile/Dockerfile
       owner: chrisotelios
       group: chrisotelios
@@ -107,3 +107,4 @@
         source: build
       state: present
     become: yes
+    become_user: root
