@@ -9,7 +9,7 @@
   tasks:
 
   - name: deploy Docker Compose stack
-      community.docker.docker_compose:
-        project_src: /home/chrisotelios/docker-project
-        files:
-        - docker-compose.yml
+    community.docker.docker_compose:
+      project_src: /home/chrisotelios/docker-project
+      files:
+      - docker-compose.yml
