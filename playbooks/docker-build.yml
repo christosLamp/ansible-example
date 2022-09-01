@@ -81,31 +81,31 @@
         virtualenv: "{{app_dir}}/myvenv"
         virtualenv_python: python3
 
-  - name: create build directory
-    file:
-      path: /chrisotelios/demo-dockerfile
-      state: directory
-      owner: chrisotelios
-      group: chrisotelios
-      mode: '0755'
-    become: yes
+  # - name: create build directory
+  #   file:
+  #     path: /chrisotelios/demo-dockerfile
+  #     state: directory
+  #     owner: chrisotelios
+  #     group: chrisotelios
+  #     mode: '0755'
+  #   become: yes
 
-  - name: copy Dockerfile
-    copy:
-      src: /home/chrisotelios/docker-project/Dockerfile
-      dest: /chrisotelios/demo-dockerfile/Dockerfile
-      owner: chrisotelios
-      group: chrisotelios
-      mode: '0644'
-    become: yes
-    become_user: root
+  # - name: copy Dockerfile
+  #   copy:
+  #     src: /home/chrisotelios/docker-project/Dockerfile
+  #     dest: /chrisotelios/demo-dockerfile/Dockerfile
+  #     owner: chrisotelios
+  #     group: chrisotelios
+  #     mode: '0644'
+  #   become: yes
+  #   become_user: root
 
   - name: build container image
     docker_image:
       name: democontainer:v1.0
       source: build
       build:
-        path: /chrisotelios/demo-dockerfile
+        path: /home/chrisotelios/docker-project
         source: build
       state: present
     become: yes
