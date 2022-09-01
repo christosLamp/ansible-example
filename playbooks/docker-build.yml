@@ -107,8 +107,8 @@
   #     sudo docker-compose up
   #     exit 0
 
-  - name: deploy Docker Compose stack
-    community.docker.docker_compose:
-      project_src: /somewhere/yourproject
-      files:
-      - docker-compose.yml
+  - name: Run container
+    become: True
+    shell:
+      cmd: "docker-compose up -d"
+      chdir: /home/chrisotelios/docker-project
