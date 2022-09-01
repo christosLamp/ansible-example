@@ -92,7 +92,7 @@
 
   - name: copy Dockerfile
     copy:
-      src: /chrisotelios/demo-dockerfile/Dockerfile
+      src: /home/chrisotelios/docker-project/Dockerfile
       dest: /chrisotelios/demo-dockerfile/Dockerfile
       owner: chrisotelios
       group: chrisotelios
