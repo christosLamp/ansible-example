@@ -109,9 +109,3 @@
       state: present
     become: yes
     become_user: root
-
-  - name: deploy Docker Compose stack
-    community.docker.docker_compose:
-      project_src: /home/chrisotelios/docker-project
-      files:
-      - docker-compose.yml
