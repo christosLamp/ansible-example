@@ -1,6 +1,6 @@
 hosts: all
- become: true
- tasks:
+become: true
+tasks:
   - name: Install docker-compose
     get_url: 
       url : https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64
