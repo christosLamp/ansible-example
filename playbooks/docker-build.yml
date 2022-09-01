@@ -97,7 +97,6 @@
       group: chrisotelios
       mode: '0644'
     become: yes
-    become_user: root
 
   - name: build container image
     docker_image:
@@ -107,3 +106,4 @@
         path: /chrisotelios/demo-dockerfile
         source: build
       state: present
+    become: yes
