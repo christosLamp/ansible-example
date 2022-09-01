@@ -1,14 +1,11 @@
 - hosts: webserver
-
-  vars:
-    app_dir: "{{user_dir}}/docker-project"
-    git_repo_url: "https://github.com/clamprou/devops-docker.git"
-    git_repo_branch: "master"
-
   tasks:
-
-  - name: deploy Docker Compose stack
-    community.docker.docker_compose:
-      project_src: /home/chrisotelios/docker-project
-      files:
-      - docker-compose.yml
+  - name: build container image
+    docker_image:
+      name: democontainer:v1.0
+      source: build
+      build:
+        path: /home/chrisotelios/docker-project
+      state: present
+    become: yes
+    become_user: root
