@@ -88,7 +88,7 @@
       owner: chrisotelios
       group: chrisotelios
       mode: '0755'
-      become: yes
+    become: yes
   - name: copy Dockerfile
     copy:
       src: ./Dockerfile
