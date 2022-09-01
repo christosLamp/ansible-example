@@ -85,6 +85,6 @@
     docker_image:
       name: democontainer:v1.0
       build:
-        path: ./
+        path: /home/chrisotelios/docker-project
         source: build
       state: present
