@@ -100,3 +100,7 @@
   #     state: present
   #   become: yes
   #   become_user: root
+
+  - name: docker-compose up
+    ansible.builtin.shell:
+      cmd: sudo docker-compose up
