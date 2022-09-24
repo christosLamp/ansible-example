@@ -104,7 +104,6 @@
       script: ls.sh
       register: out
 
-    - debug: var=out.stdout_lines
 
   - name: apply kubctl yaml files
     become: True
