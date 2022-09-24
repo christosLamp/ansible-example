@@ -67,3 +67,19 @@
     become_user: root
     shell:
       cmd: "snap install kubectl --classic"
+
+  - name: enable ingress
+    become: True
+    become_user: root
+    shell:
+      cmd: "microk8s.enable dashboard dns storage ingress"
+
+  - name: access microk8s without sudo
+    become: True
+    become_user: root
+    shell:  |
+            sudo usermod -a -G microk8s $USER 
+            sudo chown -f -R $USER ~/.kube 
+            su - $USER
+
+  
