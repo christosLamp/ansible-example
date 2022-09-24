@@ -56,43 +56,43 @@
   #   command: swapoff -a
   #   when: ansible_swaptotal_mb > 0
     
-  - name: install MicroK8s
-    become: True
-    become_user: root
-    shell:
-      cmd: "snap install microk8s --classic"
+  # - name: install MicroK8s
+  #   become: True
+  #   become_user: root
+  #   shell:
+  #     cmd: "snap install microk8s --classic"
 
-  - name: install Kubectl
-    become: True
-    become_user: root
-    shell:
-      cmd: "snap install kubectl --classic"
+  # - name: install Kubectl
+  #   become: True
+  #   become_user: root
+  #   shell:
+  #     cmd: "snap install kubectl --classic"
 
-  - name: enable ingress
-    become: True
-    become_user: root
-    shell:
-      cmd: "microk8s.enable dashboard dns storage ingress"
+  # - name: enable ingress
+  #   become: True
+  #   become_user: root
+  #   shell:
+  #     cmd: "microk8s.enable dashboard dns storage ingress"
 
-  - name: access microk8s without sudo
-    become: True
-    become_user: root
-    shell:  
-      cmd: |
-            sudo usermod -a -G microk8s $USER 
-            sudo chown -f -R $USER ~/.kube 
+  # - name: access microk8s without sudo
+  #   become: True
+  #   become_user: root
+  #   shell:  
+  #     cmd: |
+  #           sudo usermod -a -G microk8s $USER 
+  #           sudo chown -f -R $USER ~/.kube 
 
-  - name: cli
-    become: True
-    become_user: root
-    shell:
-      cmd: "curl -sS https://webinstall.dev/k9s | bash"
+  # - name: cli
+  #   become: True
+  #   become_user: root
+  #   shell:
+  #     cmd: "curl -sS https://webinstall.dev/k9s | bash"
 
-  - name: setup config
-    become: True
-    become_user: root
-    shell:
-      cmd: "microk8s.kubectl config view --raw > $HOME/.kube/config"
+  # - name: setup config
+  #   become: True
+  #   become_user: root
+  #   shell:
+  #     cmd: "microk8s.kubectl config view --raw > $HOME/.kube/config"
 
   - name: cd to git project
     become: True
