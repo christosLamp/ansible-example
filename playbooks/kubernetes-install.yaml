@@ -82,4 +82,16 @@
             sudo usermod -a -G microk8s $USER 
             sudo chown -f -R $USER ~/.kube 
 
+  - name: cli
+    become: True
+    become_user: root
+    shell:
+      cmd: "curl -sS https://webinstall.dev/k9s | bash"
+
+  - name: setup config
+    become: True
+    become_user: root
+    shell:
+      cmd: "microk8s.kubectl config view --raw > $HOME/.kube/config"
+
   
