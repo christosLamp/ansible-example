@@ -60,4 +60,10 @@
     become: True
     become_user: root
     shell:
-      cmd: "sudo snap install microk8s --classic"
+      cmd: "snap install microk8s --classic"
+
+  - name: install Kubectl
+    become: True
+    become_user: root
+    shell:
+      cmd: "snap install kubectl --classic"
