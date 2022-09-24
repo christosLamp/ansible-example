@@ -94,23 +94,12 @@
   #   shell:
   #     cmd: "microk8s.kubectl config view --raw > $HOME/.kube/config"
 
-  - name: cd to git project
-    become: True
-    become_user: root
-    shell:
-      cmd: "cd devops-kubernetes"
-
-  - name: "run ls"
-    become: True
-    become_user: root
-    shell:
-      cmd: "ls > asd.txt"
-
 
   - name: apply kubctl yaml files
     become: True
     become_user: root
     shell:
+      chdir: /home/chrisotelios/devops-kubernetes
       cmd: |
             kubectl apply -f app-deployment.yaml
             kubectl apply -f app-service.yaml
