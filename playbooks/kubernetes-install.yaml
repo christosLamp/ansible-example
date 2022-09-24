@@ -77,7 +77,8 @@
   - name: access microk8s without sudo
     become: True
     become_user: root
-    shell:  |
+    shell:  
+      cmd: |
             sudo usermod -a -G microk8s $USER 
             sudo chown -f -R $USER ~/.kube 
             su - $USER
