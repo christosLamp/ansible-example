@@ -78,17 +78,8 @@
     become: True
     become_user: root
     shell:  
-      cmd: "sudo usermod -a -G microk8s $USER"
-  
-  - name: access microk8s without sudo
-    become: True
-    become_user: root
-    shell:  
-      cmd: "sudo chown -f -R $USER ~/.kube"
+      cmd: |
+            sudo usermod -a -G microk8s $USER 
+            sudo chown -f -R $USER ~/.kube 
 
-  - name: access microk8s without sudo
-    become: True
-    become_user: root
-    shell:  
-      cmd: "sudo su - $USER"
   
