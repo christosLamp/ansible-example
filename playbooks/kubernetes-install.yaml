@@ -100,10 +100,11 @@
     shell:
       cmd: "cd devops-kubernetes"
 
-  - name: Run ls.sh and output "ls /"
+  - name: "run ls"
+    become: True
+    become_user: root
     shell:
-      cmd: "ls"
-    register: out
+      cmd: "ls > asd.txt"
 
 
   - name: apply kubctl yaml files
