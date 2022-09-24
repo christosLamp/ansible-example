@@ -101,7 +101,8 @@
       cmd: "cd devops-kubernetes"
 
   - name: Run ls.sh and output "ls /"
-    script: ls.sh
+    shell:
+      cmd: "ls"
     register: out
 
 
