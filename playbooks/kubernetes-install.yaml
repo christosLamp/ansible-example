@@ -94,6 +94,12 @@
     shell:
       cmd: "microk8s.kubectl config view --raw > $HOME/.kube/config"
 
+  - name: cd to git project
+    become: True
+    become_user: root
+    shell:
+      cmd: "cd devops-kubernetes"
+
   - name: apply kubctl yaml files
     become: True
     become_user: root
