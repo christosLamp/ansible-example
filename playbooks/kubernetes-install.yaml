@@ -7,6 +7,87 @@
     git_repo_branch: "master"
   tasks:
   
+  - name: Install docker packages
+    remote_user: chrisotelios
+    apt:
+      name: "{{ item }}"
+      state: present
+      update_cache: yes
+    with_items:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gpg-agent
+      - software-properties-common
+    tags:
+      - docker
+  - name: Add Docker s official GPG key
+    remote_user: chrisotelios
+    apt_key:
+      url: https://download.docker.com/linux/ubuntu/gpg
+      state: present
+    tags:
+      - docker
+  - name: Verify that we have the key with the fingerprint
+    remote_user: chrisotelios
+    apt_key:
+      id: 0EBFCD88
+      state: present
+    tags:
+      - docker
+  - name: Set up the stable repository
+    remote_user: chrisotelios
+    apt_repository:
+      repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable
+      state: present
+      update_cache: yes
+    tags:
+      - docker
+  - name: Update apt packages
+    remote_user: chrisotelios
+    apt:
+      update_cache: yes
+    tags:
+      - docker
+  - name: Install docker
+    remote_user: chrisotelios
+    apt:
+      name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      state: present
+      update_cache: yes
+    #notify: Start docker on boot
+    tags:
+      - docker
+      
+  - name: install python dependencies
+    become: true
+    apt:
+      update_cache: yes
+      state: latest
+      name: python3-pip
+
+  - name: install 'Docker SDK for Python'
+    pip:
+      name: docker
+
+  - name: Add remote "chrisotelios" user to "docker" group
+    remote_user: chrisotelios
+    user:
+      name: "chrisotelios"
+      group: "docker"
+      append: yes
+    tags:
+      - docker
+  - name: Install docker-compose
+    remote_user: chrisotelios
+    get_url: 
+      url : https://github.com/docker/compose/releases/download/1.25.1-rc1/docker-compose-Linux-x86_64
+      dest: /usr/local/bin/docker-compose
+      mode: 'u+x,g+x'
+  
   - name: install MicroK8s
     become: True
     become_user: root
@@ -69,6 +150,6 @@
     shell:
       chdir: "{{app_dir}}"
       cmd: |
-            microk8s kubectl apply -f app-deployment.yaml
-            microk8s kubectl apply -f app-service.yaml
-            microk8s kubectl apply -f app-ingress.yaml
+            kubectl apply -f app-deployment.yaml
+            kubectl kubectl apply -f app-service.yaml
+            kubectl kubectl apply -f app-ingress.yaml
