@@ -54,7 +54,7 @@
       regexp: "^github\\.com"
     ignore_errors: true
 
-  - name: clone django project
+  - name: clone kubernetes project
     git:
       repo: "{{git_repo_url}}"
       version: "{{git_repo_branch}}"
