@@ -112,7 +112,8 @@
     shell:  
       cmd: |
             sudo usermod -a -G microk8s $USER 
-            sudo chown -f -R $USER ~/.kube 
+            sudo chown -f -R $USER ~/.kube
+            newgrp microk8s
 
   - name: cli
     become: True
