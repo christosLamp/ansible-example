@@ -1,6 +1,10 @@
 ---
 - hosts: all
   become: true
+  vars:
+    app_dir: "{{user_dir}}/kubernetes-project"
+    git_repo_url: "https://github.com/clamprou/devops-kubernetes.git"
+    git_repo_branch: "master"
   tasks:
   
   - name: install MicroK8s
@@ -40,13 +44,30 @@
     become_user: root
     shell:
       cmd: "microk8s.kubectl config view --raw > $HOME/.kube/config"
+      
+  - name: ensure github.com is a known host
+    lineinfile:
+      dest: "{{user_dir}}/.ssh/known_hosts"
+      create: yes
+      state: present
+      line: "{{lookup('pipe', 'ssh-keyscan -t rsa github.com')}}"
+      regexp: "^github\\.com"
+    ignore_errors: true
 
+  - name: clone django project
+    git:
+      repo: "{{git_repo_url}}"
+      version: "{{git_repo_branch}}"
+      clone: yes
+      force: yes
+      dest: "{{app_dir}}"
+    changed_when: true
 
   - name: apply kubctl yaml files
     become: True
     become_user: root
     shell:
-      chdir: /home/chrisotelios/devops-kubernetes
+      chdir: "{{app_dir}}"
       cmd: |
             kubectl apply -f app-deployment.yaml
             kubectl apply -f app-service.yaml
