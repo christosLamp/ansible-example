@@ -113,7 +113,6 @@
       cmd: |
             sudo usermod -a -G microk8s $USER 
             sudo chown -f -R $USER ~/.kube
-            newgrp microk8s
             
   - name: access microk8s without sudo
     become: True
@@ -157,6 +156,6 @@
     shell:
       chdir: "{{app_dir}}"
       cmd: |
-            kubectl apply -f app-deployment.yaml
-            kubectl apply -f app-service.yaml
-            kubectl apply -f app-ingress.yaml
+            microk8s kubectl apply -f app-deployment.yaml
+            microk8s kubectl apply -f app-service.yaml
+            microk8s kubectl apply -f app-ingress.yaml
