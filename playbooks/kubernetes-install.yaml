@@ -125,9 +125,9 @@
     shell:
       cmd: "microk8s start"
       
-  - name: start microk8s
+  - name: add allias microk8s.kubectl
     shell:
-      cmd: "echo "alias k=microk8s.kubectl" >> ~/.bashrc"
+      cmd: "echo 'alias k=microk8s.kubectl' >> ~/.bashrc"
 
   - name: cli
     become: True
