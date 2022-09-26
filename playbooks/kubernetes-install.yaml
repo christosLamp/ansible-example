@@ -114,7 +114,7 @@
             sudo usermod -a -G microk8s chrisotelios 
             sudo chown -f -R chrisotelios ~/.kube
             
-   - name: enable ingress
+  - name: enable ingress
     shell:
       cmd: "newgrp microk8s"
             
