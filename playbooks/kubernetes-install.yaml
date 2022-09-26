@@ -113,6 +113,7 @@
       cmd: |
             sudo usermod -a -G microk8s chrisotelios 
             sudo chown -f -R chrisotelios ~/.kube
+            # den doulevei to su - $USER
             
   - name: access microk8s without sudo
     become: True
@@ -123,6 +124,10 @@
   - name: start microk8s
     shell:
       cmd: "microk8s start"
+      
+  - name: start microk8s
+    shell:
+      cmd: "echo "alias k=microk8s.kubectl" >> ~/.bashrc"
 
   - name: cli
     become: True
