@@ -111,14 +111,22 @@
     become_user: root
     shell:  
       cmd: |
-            sudo usermod -a -G microk8s $USER 
-            sudo chown -f -R $USER ~/.kube
+            sudo usermod -a -G microk8s chrisotelios 
+            sudo chown -f -R chrisotelios ~/.kube
+            
+   - name: enable ingress
+    shell:
+      cmd: "newgrp microk8s"
             
   - name: access microk8s without sudo
     become: True
     become_user: root
     shell:  
-      cmd: "microk8s status --wait-ready"          
+      cmd: "microk8s status --wait-ready"
+      
+  - name: start microk8s
+    shell:
+      cmd: "microk8s start"
 
   - name: cli
     become: True
