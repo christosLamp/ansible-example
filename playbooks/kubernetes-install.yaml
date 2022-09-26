@@ -122,10 +122,14 @@
       cmd: "microk8s status --wait-ready"
       
   - name: start microk8s
+    become: True
+    become_user: root
     shell:
-      cmd: "microk8s start"
+      cmd: "sudo microk8s start"
       
   - name: add allias microk8s.kubectl
+    become: True
+    become_user: root
     shell:
       cmd: "echo 'alias k=microk8s.kubectl' >> ~/.bashrc"
 
