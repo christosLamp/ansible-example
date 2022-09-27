@@ -132,5 +132,5 @@
     become: True
     become_user: root
     shell:
-      cmd: "docker-compose exec django python manage.py initial_data.json"
+      cmd: "docker-compose exec django python manage.py loaddata initial_data.json"
       chdir: /home/chrisotelios/docker-project
