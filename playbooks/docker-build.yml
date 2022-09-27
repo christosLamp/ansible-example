@@ -56,7 +56,12 @@
     with_items:
       - "{{django.env | dict2items}}"
 
-
+  - name: "APT - install misc packages"
+      apt:
+        name: [python3, python3-pip, python3-virtualenv, virtualenv]
+        update_cache: yes
+      become: yes
+      become_user: root
 
   - name: install and activate virtual environment
     block:
@@ -91,15 +96,15 @@
     become: yes
     become_user: root
 
-  - name: build container image
-    docker_image:
-      name: democontainer:v1.0
-      source: build
-      build:
-        path: /home/chrisotelios/docker-project
-      state: present
-    become: yes
-    become_user: root
+#   - name: build container image
+#     docker_image:
+#       name: democontainer:v1.0
+#       source: build
+#       build:
+#         path: /home/chrisotelios/docker-project
+#       state: present
+#     become: yes
+#     become_user: root
 
 #  - name: deploy Docker Compose stack
 #   community.docker.docker_compose:
