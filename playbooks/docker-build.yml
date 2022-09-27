@@ -112,8 +112,24 @@
 #     files:
 #     - docker-compose.yml
 
-  - name: Run container
+  - name: run container
     become: True
+    become_user: root
     shell:
       cmd: "docker-compose up -d"
+      chdir: /home/chrisotelios/docker-project
+      
+  - name: make migrations
+    become: True
+    become_user: root
+    shell:
+      chdir: /home/chrisotelios/docker-project
+      cmd: |
+            docker-compose exec django python manage.py makemigrations
+            docker-compose exec django python manage.py migrate
+            
+  - name: load initial data
+    become: True
+    shell:
+      cmd: "docker-compose exec django python manage.py initial_data.json"
       chdir: /home/chrisotelios/docker-project
